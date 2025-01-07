@@ -389,16 +389,6 @@ def search_for_answers(args, user_question: str, question_id: int, difficulty: s
     for solution_node in ost_all_solution_nodes:
         complete_road_json = find_solution(root_node, solution_node, mcts_searcher)
         complete_road.append(complete_road_json)
-            
-            
-    bestv = -1
-    ost_best_node = None
-    for rollout_node in model_rollout_nodes:
-        if rollout_node.node_value is not None:
-            if rollout_node.node_value > bestv:
-                bestv = rollout_node.node_value
-                ost_best_node = rollout_node
-    
         
     with open(os.path.join(args.answer_sheets_dir, f"Question {question_id:04d} - Complete Solutions.json"), "w", encoding="utf-8") as f:
         json.dump(complete_road, f, ensure_ascii=False, indent=4)
